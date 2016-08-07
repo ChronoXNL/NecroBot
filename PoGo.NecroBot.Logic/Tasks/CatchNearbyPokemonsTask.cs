@@ -54,7 +54,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                 var encounter =
                     await session.Client.Encounter.EncounterPokemon(pokemon.EncounterId, pokemon.SpawnPointId);
 
-                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess)
+                if (encounter.Status == EncounterResponse.Types.Status.EncounterSuccess && session.LogicSettings.CatchPokemon)
                 {
                     await CatchPokemonTask.Execute(session, cancellationToken, encounter, pokemon);
                 }
@@ -95,7 +95,7 @@ namespace PoGo.NecroBot.Logic.Tasks
         {
             var mapObjects = await session.Client.Map.GetMapObjects();
 
-            var pokemons = mapObjects.MapCells.SelectMany(i => i.CatchablePokemons)
+            var pokemons = mapObjects.Item1.MapCells.SelectMany(i => i.CatchablePokemons)
                 .OrderBy(
                     i =>
                         LocationUtils.CalculateDistanceInMeters(session.Client.CurrentLatitude,
