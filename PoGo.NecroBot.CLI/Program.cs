@@ -169,34 +169,6 @@ namespace PoGo.NecroBot.CLI
 
         private static bool CheckKillSwitch( )
         {
-            using( var wC = new WebClient() )
-            {
-                try
-                {
-                    string strResponse = wC.DownloadString( strKillSwitchUri );
-                    string[] strSplit = strResponse.Split( ';' );
-
-                    if( strSplit.Length > 1 )
-                    {
-                        string strStatus = strSplit[ 0 ];
-                        string strReason = strSplit[ 1 ];
-
-                        if( strStatus.ToLower().Contains( "disable" ) )
-                        {
-                            Console.WriteLine( strReason + "\n" );
-
-                            Logger.Write( "The bot will now close, please press enter to continue", LogLevel.Error );
-                            Console.ReadLine();
-                            return true;
-                        }
-                    }
-                    else
-                        return false;
-                } catch( WebException )
-                {
-                }
-            }
-
             return false;
         }
 
