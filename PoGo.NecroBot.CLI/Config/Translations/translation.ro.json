@@ -66,19 +66,23 @@
     },
     {
       "Key": "eventPokemonTransferred",
-      "Value": "{0}\t- CP: {1}  IV: {2}%   [Cel mai bun CP: {3}  IV: {4}%] (Bomboane: {5})"
+      "Value": "{0}\t- CP: {1}  IV: {2}%   [Cel mai bun CP: {3} IV: {4}%] (Bomboane: {5})"
     },
     {
       "Key": "eventItemRecycled",
       "Value": "{1} x{0}"
     },
     {
-      "Key": "eventPokemonCapture",
-      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | {10} cu o {9} ({10} rămase) | {11} | lat: {12} long: {13}"
+      "Key": "eventPokemonCaptureSuccess",
+      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | cu un {9} ({10} rămase) | {11} | lat: {12} long: {13}"
+    },
+    {
+      "Key": "eventPokemonCaptureFailed",
+      "Value": "({0}) | ({1}) {2} Nivel: {3} CP: ({4}/{5}) IV: {6}% | Șansă: {7}% | {8}m distanță | cu un {9} ({10} rămase) | lat: {11} long: {12}"
     },
     {
       "Key": "eventNoPokeballs",
-      "Value": "Nicio pokeball - Am ratat un pokemon {0} cu CP {1}"
+      "Value": "Niciun pokeball - Am ratat un pokemon {0} cu CP {1}"
     },
     {
       "Key": "waitingForMorePokemonToEvolve",
@@ -230,7 +234,7 @@
     },
     {
       "Key": "accessTokenExpired",
-      "Value": "Tokenul pentru autentificarea PTC a eșuat. Se reautentifică..."
+      "Value": "Tokenul pentru autentificarea PTC a expirat. Se reautentifică..."
     },
     {
       "Key": "invalidResponse",
@@ -314,15 +318,23 @@
     },
     {
       "Key": "zeroPokeballInv",
-      "Value": "Nu ai nicio pokeball în inventar, niciun pokemon nu mai poate fi prins!"
+      "Value": "Nu ai niciun pokeball în inventar, niciun pokemon nu mai poate fi prins!"
     },
     {
       "Key": "currentPokeballInv",
-      "Value": "Pokeball în prezent: {0} | Greatball: {1} | Ultraball: {2} | Masterball: {3}"
+      "Value": "Pokeballuri: {0} | Greatballuri: {1} | Ultraballuri: {2} | Masterballuri: {3}"
     },
     {
-      "Key": "currentItemInv",
-      "Value": "Poțiuni totale în prezent: {0} | Reînvieri totale: {1} | Zmeure: {2} | Bastonașe parfumate totale: {3} | Ouă norocoase: {4} | Momeli: {5}"
+      "Key": "CurrentPotionInv",
+      "Value": "Potions: {0} | SuperPotions: {1} | HyperPotions: {2} | MaxPotions: {3}"
+    },
+    {
+      "Key": "CurrentReviveInv",
+      "Value": "Revives: {0} | MaxRevives: {1}"
+    },
+    {
+      "Key": "CurrentMiscItemInv",
+      "Value": "Berrys: {0} | Incense: {1} | LuckyEggs: {2} | Lures: {3}"
     },
     {
       "Key": "maxItemsCombinedOverMaxItemStorage",
@@ -454,7 +466,7 @@
     },
     {
       "Key": "notEnoughPokeballsToSnipe",
-      "Value": "Insuficiente pokeball pentru a începe țintirea! ({0}/{1})"
+      "Value": "Insuficiente pokeballuri pentru a începe țintirea! ({0}/{1})"
     },
     {
       "Key": "displayHighestMove1Header",
@@ -538,7 +550,7 @@
     },
     {
       "Key": "promptError",
-      "Value": "[EROARE DE INTRODUCERE] Eroare cu introducerea, te rugăm să introduci  '{0}' sau '{1}"
+      "Value": "[EROARE DE INTRODUCERE] Eroare cu introducerea, te rugăm să introduci '{0}' sau '{1}"
     },
     {
       "Key": "firstStartAutoGenSettings",
