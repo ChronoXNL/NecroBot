@@ -15,6 +15,7 @@ using System.Net;
 using PoGo.NecroBot.CLI.Resources;
 using System.Reflection;
 using PoGo.NecroBot.CLI.Plugin;
+using System.Net.Http;
 
 #endregion
 
@@ -29,8 +30,8 @@ namespace PoGo.NecroBot.CLI
         private static void Main(string[] args)
         {
             string strCulture = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
-            var culture = CultureInfo.CreateSpecificCulture(strCulture);
 
+            var culture = CultureInfo.CreateSpecificCulture( "en" );
             CultureInfo.DefaultThreadCurrentCulture = culture;
             Thread.CurrentThread.CurrentCulture = culture;
 
@@ -87,7 +88,7 @@ namespace PoGo.NecroBot.CLI
                     settings.DefaultLatitude = lat;
                     settings.DefaultLongitude = lng;
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
             }
 
 
@@ -188,7 +189,7 @@ namespace PoGo.NecroBot.CLI
             ProgressBar.fill(100);
 
             machine.AsyncStart(new VersionCheckState(), session);
-
+            
             if (settings.UseTelegramAPI)
             {
                 session.Telegram = new Logic.Service.TelegramService(settings.TelegramAPIKey, session);
@@ -202,6 +203,8 @@ namespace PoGo.NecroBot.CLI
                 Console.Clear();
             }
             catch (IOException) { }
+
+            settings.checkProxy();
 
             QuitEvent.WaitOne();
         }
