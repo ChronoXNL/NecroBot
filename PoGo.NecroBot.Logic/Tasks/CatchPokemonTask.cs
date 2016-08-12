@@ -2,9 +2,11 @@
 
 using System;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using PoGo.NecroBot.Logic.Common;
 using PoGo.NecroBot.Logic.Event;
+using PoGo.NecroBot.Logic.Logging;
 using PoGo.NecroBot.Logic.PoGoUtils;
 using PoGo.NecroBot.Logic.State;
 using PoGo.NecroBot.Logic.Utils;
@@ -12,8 +14,6 @@ using POGOProtos.Inventory.Item;
 using POGOProtos.Map.Fort;
 using POGOProtos.Map.Pokemon;
 using POGOProtos.Networking.Responses;
-using System.Threading;
-using PoGo.NecroBot.Logic.Logging;
 
 #endregion
 
@@ -197,6 +197,7 @@ namespace PoGo.NecroBot.Logic.Tasks
 
                     evt.Exp = totalExp;
                     evt.Stardust = profile.PlayerData.Currencies.ToArray()[1].Amount;
+                    evt.UniqueId = caughtPokemonResponse.CapturedPokemonId;
 
                     var pokemonSettings = await session.Inventory.GetPokemonSettings();
                     var pokemonFamilies = await session.Inventory.GetPokemonFamilies();
@@ -216,8 +217,7 @@ namespace PoGo.NecroBot.Logic.Tasks
                         evt.FamilyCandies = caughtPokemonResponse.CaptureAward.Candy.Sum();
                     }
 
-                    if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon)
-                        await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
+                   
                 }
 
                 evt.CatchType = encounter is EncounterResponse
@@ -253,7 +253,8 @@ namespace PoGo.NecroBot.Logic.Tasks
                 session.EventDispatcher.Send(evt);
 
                 attemptCounter++;
-
+                if (session.LogicSettings.TransferDuplicatePokemonOnCapture && session.LogicSettings.TransferDuplicatePokemon)
+                    await TransferDuplicatePokemonTask.Execute(session, cancellationToken);
                 DelayingUtils.Delay(session.LogicSettings.DelayBetweenPokemonCatch, 0);
             } while (caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchMissed ||
                      caughtPokemonResponse.Status == CatchPokemonResponse.Types.CatchStatus.CatchEscape);
