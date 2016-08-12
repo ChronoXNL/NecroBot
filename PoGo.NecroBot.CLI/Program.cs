@@ -177,7 +177,13 @@ namespace PoGo.NecroBot.CLI
             ProgressBar.fill(100);
 
             machine.AsyncStart(new VersionCheckState(), session);
-            
+
+            try
+            {
+                Console.Clear();
+            }
+            catch( IOException ) { }
+
             if (settings.UseTelegramAPI)
             {
                 session.Telegram = new Logic.Service.TelegramService(settings.TelegramAPIKey, session);
@@ -185,12 +191,6 @@ namespace PoGo.NecroBot.CLI
 
             if (session.LogicSettings.UseSnipeLocationServer)
                 SnipePokemonTask.AsyncStart(session);
-
-            try
-            {
-                Console.Clear();
-            }
-            catch (IOException) { }
 
             settings.checkProxy(session.Translation);
 
